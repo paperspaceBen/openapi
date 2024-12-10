@@ -1,0 +1,59 @@
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+        example: '123e4567-e89b-12d3-a456-426614174000'
+
+      name:
+        type: string
+        title: name of the model
+        example: 'Example Model'
+
+      inference_name:
+        type: string
+        title: internally used name
+        example: 'example_model'
+
+      version:
+        $ref: 'apiModelVersion.yml'
+        title: version
+      inference_version:
+        type: string
+        title: internally used version
+        example: '1.0.0'
+
+      url:
+        type: string
+        title: download url
+        example: 'https://example.com/model.zip'
+
+      is_foundational:
+        type: boolean
+        title: true if it is a foundational model provided by do
+      upload_complete:
+        type: boolean
+        title: model has been fully uploaded
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+        example: '2020-01-01T00:00:00Z'
+
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+        example: '2020-01-01T00:00:00Z'
+
+      metadata:
+        type: object
+        title: additional meta data
+      parent_uuid:
+        type: string
+        title: unique id of the model, this model is based on
+        example: '123e4567-e89b-12d3-a456-426614174000'
+        
+      agreement:
+        $ref: 'apiAgreement.yml'
+    title: Description of a Model

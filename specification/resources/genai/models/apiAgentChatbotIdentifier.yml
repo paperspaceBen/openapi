@@ -1,0 +1,7 @@
+type: object
+properties:
+  agent_chatbot_identifier:
+    type: string
+    title: agent chatbot identifier
+    example: "example_identifier"
+title: Agent Chatbot Identifier

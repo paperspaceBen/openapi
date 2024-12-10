@@ -1,0 +1,28 @@
+type: object
+properties:
+  name:
+    type: string
+    title: name of chatbot
+    example: "A Chatbot"
+
+  primary_color:
+    type: string
+    example: "#000000"
+
+  secondary_color:
+    type: string
+    example: "#FFFFFF"
+
+  starting_message:
+    type: string
+    example: "Hello, how can I help you today?"
+
+  button_background_color:
+    type: string
+    example: "#000000"
+
+  logo:
+    type: string
+    example: "https://example.com/logo.png"
+    
+title: A Chatbot

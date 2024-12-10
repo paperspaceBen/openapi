@@ -1,0 +1,14 @@
+type: object
+properties:
+  agents:
+    type: array
+    items:
+      $ref: '../models/apiAgent.yml'
+    title: Agents
+  links:
+    $ref: '../models/apiLinks.yml'
+    title: links to other pages
+  meta:
+    $ref: '../models/apiMeta.yml'
+    title: information about the data set
+title: List of Agents

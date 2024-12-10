@@ -1,0 +1,6 @@
+type: object
+properties:
+  pages:
+    $ref: 'apiPages.yml'
+    title: Links to other pages
+title: Links to other pages

@@ -1,0 +1,15 @@
+type: object
+properties:
+  first:
+    type: string
+    title: first page
+  previous:
+    type: string
+    title: previous page
+  next:
+    type: string
+    title: next page
+  last:
+    type: string
+    title: last page
+title: Information about how to reach other pages

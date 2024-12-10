@@ -1,0 +1,28 @@
+type: object
+properties:
+  name:
+    type: string
+    title: agent name
+  model_uuid:
+    type: string
+    title: model id
+  instruction:
+    type: string
+    title: agent instruction
+  description:
+    type: string
+    title: agent description
+  project_id:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  region:
+    type: string
+    title: region code
+  knowledge_base_uuid:
+    type: array
+    items:
+      type: string
+title: Data for Agent Creation

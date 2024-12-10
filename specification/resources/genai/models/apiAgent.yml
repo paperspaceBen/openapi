@@ -1,0 +1,131 @@
+type: object
+properties:
+  uuid:
+    type: string
+    title: unique agent id
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  name:
+    type: string
+    title: agent name
+    example: "Agent007"
+  created_at:
+    type: string
+    format: date-time
+    title: creation date / time
+    example: "2023-01-01T00:00:00Z"
+  updated_at:
+    type: string
+    format: date-time
+    title: last modified
+    example: "2023-01-02T00:00:00Z"
+  url:
+    type: string
+    title: access your agent under this url
+    example: "https://digitalocean-example-url.com/agent/123"
+  instruction:
+    type: string
+    title: first instruction for agent
+    example: "Start by greeting the user"
+  description:
+    type: string
+    title: description of agent
+    example: "This is a sample description of the agent."
+  model:
+    $ref: 'apiModel.yml'
+    title: model the agent is based on
+  deployment:
+    $ref: 'apiDeployment.yml'
+  functions:
+    type: array
+    items:
+      $ref: 'apiAgentFunction.yml'
+  child_agents:
+    type: array
+    items:
+      $ref: 'apiAgent.yml'
+    title: child agents
+  parent_agents:
+    type: array
+    items:
+      $ref: 'apiAgent.yml'
+    title: parent agents
+  knowledge_bases:
+    type: array
+    items:
+      $ref: 'apiKnowledgeBase.yml'
+    title: knowledge bases
+  api_keys:
+    type: array
+    items:
+      $ref: 'apiAgentAPIKey.yml'
+    title: api keys
+  k:
+    type: integer
+    format: int64
+    example: 5
+  temperature:
+    type: number
+    format: float
+    example: 0.5
+  top_p:
+    type: number
+    format: float
+    example: 5.5
+  max_tokens:
+    type: integer
+    format: int64
+    example: 5
+  tags:
+    type: array
+    items:
+      type: string
+    example: ["tag1", "tag2"]
+  project_id:
+    type: string
+    example: "project-123"
+  route_name:
+    type: string
+    title: route name
+    example: "example-route-name"
+  if_case:
+    type: string
+    example: "example-if-case"
+  route_created_by:
+    type: string
+    format: uint64
+    example: "uesername@domain.com"
+  route_uuid:
+    type: string
+    example: "123e4567-e89b-12d3-a456-426614174001"
+  region:
+    type: string
+    title: region code
+    example: "us-east-1"
+  chatbot:
+    $ref: 'apiChatbot.yml'
+  route_created_at:
+    type: string
+    format: date-time
+    title: creation of route date / time
+    example: "2023-01-01T00:00:00Z"
+  user_id:
+    type: string
+    format: uint64
+    title: id of user that created the agent
+    example: "user-123"
+  guardrails:
+    type: array
+    items:
+      $ref: 'apiAgentGuardrail.yml'
+    title: the guardrails the agent is attached to
+  chatbot_identifiers:
+    type: array
+    items:
+      $ref: 'apiAgentChatbotIdentifier.yml'
+    title: chatbot identifiers
+  api_key_infos:
+    type: array
+    items:
+      $ref: 'apiAgentAPIKeyInfo.yml'
+    title: api key infos
+title: An Agent

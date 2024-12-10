@@ -1,0 +1,75 @@
+summary: List Agents
+description: Returns a list of agents specific to the users context.
+operationId: GenAIAPI_ListAgentsPublic
+responses:
+
+  '200':
+    description: A successful response.
+    schema:
+      $ref: 'responses/apiListAgentsOutput.yml'
+
+    headers:
+      ratelimit-limit:
+        $ref: '../../shared/headers.yml#/ratelimit-limit'
+      ratelimit-remaining:
+        $ref: '../../shared/headers.yml#/ratelimit-remaining'
+      ratelimit-reset:
+        $ref: '../../shared/headers.yml#/ratelimit-reset'
+
+    content:
+      application/json:
+        schema:
+          properties:
+            action:
+              $ref: 'responses/apiListAgentsOutput.yml'
+
+
+  '401':
+    $ref: '../../shared/responses/unauthorized.yml'
+
+  '404':
+    $ref: '../../shared/responses/not_found.yml'
+
+  '429':
+    $ref: '../../shared/responses/too_many_requests.yml'
+
+  '500':
+    $ref: '../../shared/responses/server_error.yml'
+
+
+parameters:
+  - name: only_deployed
+    description: only list agents that are deployed.
+    in: query
+    required: false
+    type: boolean
+    example: true
+
+  - name: field_mask.paths
+    description: The set of field mask paths.
+    in: query
+    required: false
+    type: array
+    items:
+      type: string
+    collectionFormat: multi
+    example: ["path1", "path2"]
+    
+  - name: page
+    description: page number.
+    in: query
+    required: false
+    type: string
+    format: uint64
+    example: 1
+
+  - name: per_page
+    description: items per page.
+    in: query
+    required: false
+    type: string
+    format: uint64
+    example: 10
+
+tags:
+  - GenAIAPI

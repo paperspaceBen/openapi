@@ -1,0 +1,26 @@
+type: object
+properties:
+  name:
+    type: string
+    title: name
+    example: "example_name"
+  uuid:
+    type: string
+    title: uuid
+    example: "123e4567-e89b-12d3-a456-426614174000"
+  created_by:
+    type: string
+    format: uint64
+    title: created by
+    example: "user_123"
+  created_at:
+    type: string
+    format: date-time
+    title: creation date
+    example: "2023-01-01T00:00:00Z"
+  deleted_at:
+    type: string
+    format: date-time
+    title: deleted date
+    example: "2023-01-01T00:00:00Z"
+title: Agent API Key Info

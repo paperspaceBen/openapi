@@ -1,0 +1,6 @@
+type: object
+properties:
+  agent:
+    $ref: '../models/apiAgent.yml'
+    title: the updated agent
+title: information about an updated agent

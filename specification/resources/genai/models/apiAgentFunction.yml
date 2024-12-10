@@ -1,0 +1,53 @@
+type: object
+properties:
+  uuid:
+    type: string
+    title: unique id
+    example: "123e4567-e89b-12d3-a456-426614174000"
+
+  name:
+    type: string
+    title: name
+    example: "Example Agent Name"
+
+  description:
+    type: string
+    title: agent description
+    example: "This is an example agent description."
+
+  api_key:
+    type: string
+    title: api key
+    example: "your-api-key-here"
+  url:
+    type: string
+    title: download your agent here
+    example: "https://api.gen.ai/v2/genai/agent/123e4567-e89b-12d3-a456-426614174000/download"
+
+  input_schema:
+    type: object
+
+  output_schema:
+    type: object
+
+  created_at:
+    type: string
+    format: date-time
+    title: creation date / time
+    example: "2021-01-01T00:00:00Z"
+
+  updated_at:
+    type: string
+    format: date-time
+    title: last modified
+    example: "2021-01-01T00:00:00Z"
+
+  faas_namespace:
+    type: string
+    example: "your-faas-namespace-here"
+
+  faas_name:
+    type: string
+    example: "your-faas-name-here"
+    
+title: description missing

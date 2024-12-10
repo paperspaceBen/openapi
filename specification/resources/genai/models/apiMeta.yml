@@ -1,0 +1,7 @@
+type: object
+properties:
+  total:
+    type: string
+    format: uint64
+    title: total amount of items over all pages
+title: Meta information about the data set

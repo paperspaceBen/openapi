@@ -1,0 +1,36 @@
+type: object
+properties:
+  uuid:
+    type: string
+    title: unique agent id
+  name:
+    type: string
+    title: agent name
+  instruction:
+    type: string
+    title: agent instruction
+  description:
+    type: string
+    title: agent description
+  model_uuid:
+    type: string
+    title: model id
+  project_id:
+    type: string
+  tags:
+    type: array
+    items:
+      type: string
+  k:
+    type: integer
+    format: int64
+  temperature:
+    type: number
+    format: float
+  top_p:
+    type: number
+    format: float
+  max_tokens:
+    type: integer
+    format: int64
+title: Data to modify an existing Agent

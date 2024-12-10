@@ -1,0 +1,44 @@
+type: object
+properties:
+  uuid:
+    type: string
+    title: unique id
+    example: 12345678-1234-1234-1234-123456789012
+
+  knowledge_base_uuid:
+    type: string
+    title: knowledge base id
+    example: 12345678-1234-1234-1234-123456789012
+
+  data_source_uuids:
+    type: array
+    items:
+      type: string
+    example: 
+      - 12345678-1234-1234-1234-123456789012
+      - 12345678-1234-1234-1234-123456789012
+  created_at:
+    type: string
+    format: date-time
+    title: creation date / time
+    example: 2020-01-01T00:00:00Z
+
+  updated_at:
+    type: string
+    format: date-time
+    title: last modified
+    example: 2020-01-01T00:00:00Z
+
+  started_at:
+    type: string
+    format: date-time
+    example: 2020-01-01T00:00:00Z
+
+  finished_at:
+    type: string
+    format: date-time
+    example: 2020-01-01T00:00:00Z
+    
+  phase:
+    $ref: 'apiBatchJobPhase.yml'
+title: IndexingJob description

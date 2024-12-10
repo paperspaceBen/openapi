@@ -1,0 +1,6 @@
+type: object
+properties:
+  agent:
+    $ref: '../models/apiAgent.yml'
+    title: The created agent
+title: Information about a newly created Agent

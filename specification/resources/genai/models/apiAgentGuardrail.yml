@@ -1,0 +1,52 @@
+type: object
+properties:
+  uuid:
+    type: string
+    example: "123e4567-e89b-12d3-a456-426614174000"
+
+  priority:
+    type: integer
+    format: int32
+    example: 1
+
+  is_attached:
+    type: boolean
+    example: true
+
+  created_at:
+    type: string
+    format: date-time
+    example: "2020-01-01T00:00:00Z"
+
+  updated_at:
+    type: string
+    format: date-time
+    example: "2020-01-01T00:00:00Z"
+
+  agent_uuid:
+    type: string
+    example: "123e4567-e89b-12d3-a456-426614174000"
+
+  guardrail_uuid:
+    type: string
+    example: "123e4567-e89b-12d3-a456-426614174000"
+
+  name:
+    type: string
+    example: "Example Guardrail"
+
+  description:
+    type: string
+    example: "This is an example guardrail description."
+
+  default_response:
+    type: string
+    example: "default response"
+    
+  is_default:
+    type: boolean
+  type:
+    $ref: 'apiGuardrailType.yml'
+  metadata:
+    type: object
+title: A Agent Guardrail
