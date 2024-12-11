@@ -1,0 +1,3124 @@
+swagger: '2.0'
+info:
+  title: Gen Ai Platform
+  description: >-
+    Gen Ai Platform allows users to generate chatbot without deep knowledge
+    about Machine Learning.
+  version: version not set
+host: api.digitalocean.com
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /v2/genai/agent/{uuid}:
+    delete:
+      summary: Delete one Agent
+      description: Delete one specific Agent.
+      operationId: GenAIAPI_DeleteAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiDeleteAgentOutput'
+      parameters:
+        - name: uuid
+          description: unique agent id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/agents:
+    get:
+      summary: List Agents
+      description: Returns a list of agents specific to the users context.
+      operationId: GenAIAPI_ListAgentsPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListAgentsOutput'
+      parameters:
+        - name: only_deployed
+          description: only list agents that are deployed.
+          in: query
+          required: false
+          type: boolean
+        - name: field_mask.paths
+          description: The set of field mask paths.
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create an Agent
+      description: Creates a new Agent and returns the newly created Agent Object.
+      operationId: GenAIAPI_CreateAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateAgentOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateAgentInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/api_keys:
+    get:
+      summary: List Agent API Keys
+      description: List Agent API Keys.
+      operationId: GenAIAPI_ListAgentAPIKeysPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListAgentAPIKeysOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create Agent API Key
+      description: Create Agent API Key.
+      operationId: GenAIAPI_CreateAgentAPIKeyPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateAgentAPIKeyOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateAgentAPIKeyInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/api_keys/{api_key_uuid}:
+    delete:
+      summary: Delete Agent API Key
+      description: Delete Agent API Key.
+      operationId: GenAIAPI_DeleteAgentAPIKeyPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiDeleteAgentAPIKeyOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: api_key_uuid
+          description: api key id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update Agent API Key
+      description: Update Agent API Key.
+      operationId: GenAIAPI_UpdateAgentAPIKeyPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateAgentAPIKeyOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: api_key_uuid
+          description: api key id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateAgentAPIKeyInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/api_keys/{api_key_uuid}/regenerate:
+    put:
+      summary: Regenerate Agent API Key
+      description: Regenerate Agent API Key.
+      operationId: GenAIAPI_RegenerateAgentAPIKeyPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiRegenerateAgentAPIKeyOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: api_key_uuid
+          description: api key id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/chatbot:
+    delete:
+      summary: Delete Chatbot
+      description: Delete Chatbot.
+      operationId: GenAIAPI_DeleteChatbotPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiDeleteChatbotOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create Chatbot
+      description: Create Chatbot.
+      operationId: GenAIAPI_CreateChatbotPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateChatbotOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateChatbotInputPublic'
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update Chatbot
+      description: Update Chatbot.
+      operationId: GenAIAPI_UpdateChatbotPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateChatbotOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateChatbotInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/functions:
+    post:
+      summary: Link Agent Funciton
+      description: Link Agent Funciton.
+      operationId: GenAIAPI_LinkAgentFunctionPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiLinkAgentFunctionOutput'
+      parameters:
+        - name: agent_uuid
+          description: agnet id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiLinkAgentFunctionInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/functions/{function_uuid}:
+    delete:
+      summary: Unlink Agent Funciton
+      description: Unlink Agent Funciton.
+      operationId: GenAIAPI_UnlinkAgentFunctionPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUnlinkAgentFunctionOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: function_uuid
+          description: function id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update Agent Funciton
+      description: Update Agent Funciton.
+      operationId: GenAIAPI_UpdateAgentFunctionPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateAgentFunctionOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: function_uuid
+          description: function id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateAgentFunctionInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{agent_uuid}/knowledge_bases/{knowledge_base_uuid}:
+    delete:
+      summary: Unlink Knowledge Base
+      description: Unlink Knowledge Base.
+      operationId: GenAIAPI_UnlinkKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUnlinkKnowledgeBaseOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: knowledge_base_uuid
+          description: knowledge base
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    post:
+      summary: Link Knowledge Base
+      description: Link Knowledge Base.
+      operationId: GenAIAPI_LinkKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiLinkKnowledgeBaseOutput'
+      parameters:
+        - name: agent_uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: knowledge_base_uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{parent_agent_uuid}/child_agents/{child_agent_uuid}:
+    delete:
+      summary: Unlink Agent
+      description: Unlink Agent.
+      operationId: GenAIAPI_UnlinkAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUnlinkAgentOutput'
+      parameters:
+        - name: parent_agent_uuid
+          description: pagent agent id
+          in: path
+          required: true
+          type: string
+        - name: child_agent_uuid
+          description: child agent id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    post:
+      summary: Link Agent
+      description: Link Agent.
+      operationId: GenAIAPI_LinkAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiLinkAgentOutput'
+      parameters:
+        - name: parent_agent_uuid
+          description: parent agent id
+          in: path
+          required: true
+          type: string
+        - name: child_agent_uuid
+          description: child agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiLinkAgentInputPublic'
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update linked Agent
+      description: Update linked Agent.
+      operationId: GenAIAPI_UpdateLinkedAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateLinkedAgentOutput'
+      parameters:
+        - name: parent_agent_uuid
+          description: parent agent id
+          in: path
+          required: true
+          type: string
+        - name: child_agent_uuid
+          description: child agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateLinkedAgentInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{uuid}:
+    get:
+      summary: Get one Agent
+      description: Query one specific Agent.
+      operationId: GenAIAPI_GetAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetAgentOutput'
+      parameters:
+        - name: uuid
+          description: unique agent id
+          in: path
+          required: true
+          type: string
+        - name: field_mask.paths
+          description: The set of field mask paths.
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+          collectionFormat: multi
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update an Agent
+      description: Update an Agent.
+      operationId: GenAIAPI_UpdateAgentPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateAgentOutput'
+      parameters:
+        - name: uuid
+          description: unique agent id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateAgentInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{uuid}/child_agents:
+    get:
+      summary: GetChildren?
+      description: whos children?
+      operationId: GenAIAPI_GetChildrenPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetChildrenOutput'
+      parameters:
+        - name: uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{uuid}/deployment_visibility:
+    put:
+      summary: Update Agent Deployment Visibility
+      description: Update Agent Deployment Visibility.
+      operationId: GenAIAPI_UpdateAgentDeploymentVisibilityPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateAgentDeploymentVisbilityOutput'
+      parameters:
+        - name: uuid
+          description: unique id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateAgentDeploymentVisibilityInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/agents/{uuid}/usage:
+    get:
+      summary: Get Agent Usage
+      description: Get Agent Usage.
+      operationId: GenAIAPI_GetAgentUsagePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetAgentUsageOutput'
+      parameters:
+        - name: uuid
+          description: agent id
+          in: path
+          required: true
+          type: string
+        - name: start
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: stop
+          in: query
+          required: false
+          type: string
+          format: date-time
+      tags:
+        - GenAIAPI
+  /v2/genai/auth/agents/{agent_uuid}/token:
+    post:
+      summary: Issue Agent Token
+      description: Issue Agent Token.
+      operationId: GenAIAPI_IssueAgentTokenPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiIssueAgentTokenOutput'
+      parameters:
+        - name: agent_uuid
+          description: Agent ID
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiIssueAgentTokenInputPublic'
+      tags:
+        - GenAIAPI
+    put:
+      summary: Refresh Agent Token
+      description: Refresh Agent Token.
+      operationId: GenAIAPI_RefreshAgentTokenPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiRefreshAgentTokenOutput'
+      parameters:
+        - name: agent_uuid
+          description: Agent ID
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/indexing_jobs:
+    get:
+      summary: List Knowledge base Indexing jobs
+      description: List Knowledge base Indexing jobs.
+      operationId: GenAIAPI_ListKnowledgeBaseIndexingJobsPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListKnowledgeBaseIndexingJobsOutput'
+      parameters:
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Start Knowledge base Indexing job
+      description: Start Knowledge base Indexing job.
+      operationId: GenAIAPI_StartKnowledgeBaseIndexingJobPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiStartKnowledgeBaseIndexingJobOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiStartKnowledgeBaseIndexingJobInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/indexing_jobs/{uuid}:
+    get:
+      summary: Get Knowledge base Indexing job
+      description: Get Knowledge base Indexing job.
+      operationId: GenAIAPI_GetKnowledgeBaseIndexingJobPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetKnowledgeBaseIndexingJobOutput'
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/indexing_jobs/{uuid}/cancel:
+    put:
+      summary: Cancel Knowledge base Indexing job
+      description: Cancel Knowledge base Indexing job.
+      operationId: GenAIAPI_CancelKnowledgeBaseIndexingJobPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCancelKnowledgeBaseIndexingJobOutput'
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCancelKnowledgeBaseIndexingJobInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/indexing_jobs/{uuid}/usage:
+    get:
+      summary: Get Knowledge Base Indexing Job Usage
+      description: Get Knowledge Base Indexing Job Usage.
+      operationId: GenAIAPI_GetKnowledgeBaseIndexingJobUsagePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetKnowledgeBaseIndexingJobUsageOutput'
+      parameters:
+        - name: uuid
+          description: indexing job id
+          in: path
+          required: true
+          type: string
+        - name: start
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: stop
+          in: query
+          required: false
+          type: string
+          format: date-time
+      tags:
+        - GenAIAPI
+  /v2/genai/knowledge_bases:
+    get:
+      summary: List Knowledge bases
+      description: Provides a list of knowledge bases for the user context.
+      operationId: GenAIAPI_ListKnowledgeBasesPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListKnowledgeBasesOutput'
+      parameters:
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create a Knowledge base
+      description: Create a Knowledge base.
+      operationId: GenAIAPI_CreateKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateKnowledgeBaseOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateKnowledgeBaseInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/knowledge_bases/{knowledge_base_uuid}/agents:
+    get:
+      summary: List Knowledge base Agents
+      description: List Knowledge base Agents.
+      operationId: GenAIAPI_ListKnowledgeBaseAgentsPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListKnowledgeBaseAgentsOutput'
+      parameters:
+        - name: knowledge_base_uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/knowledge_bases/{knowledge_base_uuid}/data_sources:
+    get:
+      summary: List Knowledge base Data source
+      description: List Knowledge base Data source.
+      operationId: GenAIAPI_ListKnowledgeBaseDataSourcesPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListKnowledgeBaseDataSourcesOutput'
+      parameters:
+        - name: knowledge_base_uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create Knowledge base Data source
+      description: Create Knowledge base Data source.
+      operationId: GenAIAPI_CreateKnowledgeBaseDataSourcePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateKnowledgeBaseDataSourceOutput'
+      parameters:
+        - name: knowledge_base_uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateKnowledgeBaseDataSourceInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/knowledge_bases/{knowledge_base_uuid}/data_sources/{data_source_uuid}:
+    delete:
+      summary: Delete one Knowledge Base Data Source
+      description: Delete one Knowledge Base Data Source.
+      operationId: GenAIAPI_DeleteKnowledgeBaseDataSourcePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiDeleteKnowledgeBaseDataSourceOutput'
+      parameters:
+        - name: knowledge_base_uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+        - name: data_source_uuid
+          description: data source id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/knowledge_bases/{uuid}:
+    get:
+      summary: Get one Knowledge base
+      description: lists one specific Knowledge base.
+      operationId: GenAIAPI_GetKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetKnowledgeBaseOutput'
+      parameters:
+        - name: uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    delete:
+      summary: Delete a Knowledge base
+      description: Delete a Knowledge base.
+      operationId: GenAIAPI_DeleteKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiDeleteKnowledgeBaseOutput'
+      parameters:
+        - name: uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+    put:
+      summary: Update one Knowledge Base
+      description: Update one Knowledge Base.
+      operationId: GenAIAPI_UpdateKnowledgeBasePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateKnowledgeBaseOutput'
+      parameters:
+        - name: uuid
+          description: knowledge base id
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateKnowledgeBaseInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/models:
+    get:
+      summary: List Models
+      description: Provides a list of Models available to the user.
+      operationId: GenAIAPI_ListModelsPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListModelsOutput'
+      parameters:
+        - name: usecases
+          in: query
+          required: false
+          type: array
+          items:
+            type: string
+            enum:
+              - MODEL_USECASE_UNKNOWN
+              - MODEL_USECASE_AGENT
+              - MODEL_USECASE_FINETUNED
+              - MODEL_USECASE_KNOWLEDGEBASE
+              - MODEL_USECASE_GUARDRAIL
+          collectionFormat: multi
+        - name: public_only
+          description: only include models that are publicly available.
+          in: query
+          required: false
+          type: boolean
+        - name: page
+          description: page number.
+          in: query
+          required: false
+          type: string
+          format: uint64
+        - name: per_page
+          description: items per page.
+          in: query
+          required: false
+          type: string
+          format: uint64
+      tags:
+        - GenAIAPI
+    post:
+      summary: Create a Model
+      description: Create a new Model.
+      operationId: GenAIAPI_CreateModelPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiCreateModelOutput'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiCreateModelInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{name}/meta_data:
+    put:
+      summary: Update Model Meta Data
+      description: >-
+        Updates Meta Data for a Model. Existing attributes in the JSON object
+        will not be deleted, but replaced if a new attribute with the same name
+        is provided.
+      operationId: GenAIAPI_UpdateModelMetadataPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiUpdateModelMetadataOutput'
+      parameters:
+        - name: name
+          description: model name
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiUpdateModelMetadataInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{name}/upload_complete:
+    put:
+      summary: Set Model Uplaod complete
+      description: >-
+        Marks the upload for a model as completed. Call this after you finished
+        uploading all files for a Model.
+      operationId: GenAIAPI_ModelUploadCompletePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiModelUploadCompleteOutput'
+      parameters:
+        - name: name
+          description: model name
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/apiModelUploadCompleteInputPublic'
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{name}/url:
+    get:
+      summary: Model Upload URL
+      description: >-
+        Generates a url that is valid for a period of time and that can be used
+        to upload ONE file.
+      operationId: GenAIAPI_TeamModelURLPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiTeamModelURLOutput'
+      parameters:
+        - name: name
+          description: model namne
+          in: path
+          required: true
+          type: string
+        - name: version.major
+          description: major version number.
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: version.minor
+          description: minor version number.
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: version.patch
+          description: patch version number.
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: filename
+          description: filename of one file that you want to upload.
+          in: query
+          required: false
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{name}/versions:
+    get:
+      summary: Get All Model Versions
+      description: Given a model name it provides a list of all versions.
+      operationId: GenAIAPI_ModelVersionsPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListModelsOutput'
+      parameters:
+        - name: name
+          description: model name
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{uuid}:
+    get:
+      summary: Get one Model
+      description: Query one Model.
+      operationId: GenAIAPI_GetModelPublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetModelOutput'
+      parameters:
+        - name: uuid
+          description: model id
+          in: path
+          required: true
+          type: string
+      tags:
+        - GenAIAPI
+  /v2/genai/models/{uuid}/usage:
+    get:
+      summary: Get Model Usage
+      description: Get Model Usage.
+      operationId: GenAIAPI_GetModelUsagePublic
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiGetModelUsageOutput'
+      parameters:
+        - name: uuid
+          description: model id
+          in: path
+          required: true
+          type: string
+        - name: start
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: stop
+          in: query
+          required: false
+          type: string
+          format: date-time
+      tags:
+        - GenAIAPI
+  /v2/genai/regions:
+    get:
+      summary: List Regions
+      description: List Regions.
+      operationId: GenAIAPI_ListRegions
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/apiListRegionsOutput'
+      parameters:
+        - name: serves_inference
+          in: query
+          required: false
+          type: boolean
+        - name: serves_batch
+          in: query
+          required: false
+          type: boolean
+      tags:
+        - GenAIAPI
+definitions:
+  apiAcceptAgreementOutput:
+    type: object
+    properties:
+      team_agreement:
+        $ref: '#/definitions/apiTeamAgreement'
+    title: AcceptAgreementOutput Description
+  apiAgent:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique agent id
+      name:
+        type: string
+        title: agent name
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      url:
+        type: string
+        title: access your agent under this url
+      instruction:
+        type: string
+        title: first instruction for agent
+      description:
+        type: string
+        title: description of agent
+      model:
+        $ref: '#/definitions/apiModel'
+        title: model the agent is based on
+      deployment:
+        $ref: '#/definitions/apiDeployment'
+      functions:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentFunction'
+      child_agents:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+        title: child agents
+      parent_agents:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+        title: parent agents
+      knowledge_bases:
+        type: array
+        items:
+          $ref: '#/definitions/apiKnowledgeBase'
+        title: knowledge bases
+      api_keys:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentAPIKey'
+        title: api keys
+      k:
+        type: integer
+        format: int64
+      temperature:
+        type: number
+        format: float
+      top_p:
+        type: number
+        format: float
+      max_tokens:
+        type: integer
+        format: int64
+      tags:
+        type: array
+        items:
+          type: string
+      project_id:
+        type: string
+      route_name:
+        type: string
+        title: route name
+      if_case:
+        type: string
+      route_created_by:
+        type: string
+        format: uint64
+      route_uuid:
+        type: string
+      region:
+        type: string
+        title: region code
+      chatbot:
+        $ref: '#/definitions/apiChatbot'
+      route_created_at:
+        type: string
+        format: date-time
+        title: creation of route date / time
+      user_id:
+        type: string
+        format: uint64
+        title: id of user that created the agent
+      guardrails:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentGuardrail'
+        title: the guardrails the agent is attached to
+      chatbot_identifiers:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentChatbotIdentifier'
+        title: chatbot identifiers
+      api_key_infos:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key infos
+    title: An Agent
+  apiAgentAPIKey:
+    type: object
+    properties:
+      api_key:
+        type: string
+        title: api key
+    title: Agent API Key
+  apiAgentAPIKeyInfo:
+    type: object
+    properties:
+      name:
+        type: string
+        title: name
+      uuid:
+        type: string
+        title: uuid
+      created_by:
+        type: string
+        format: uint64
+        title: created by
+      created_at:
+        type: string
+        format: date-time
+        title: creation date
+      deleted_at:
+        type: string
+        format: date-time
+        title: deleted date
+    title: Agent API Key Info
+  apiAgentChatbotIdentifier:
+    type: object
+    properties:
+      agent_chatbot_identifier:
+        type: string
+        title: agent chatbot identifier
+    title: Agent Chatbot Identifier
+  apiAgentFunction:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+      name:
+        type: string
+        title: name
+      description:
+        type: string
+        title: agent description
+      api_key:
+        type: string
+        title: api key
+      url:
+        type: string
+        title: download your agent here
+      input_schema:
+        type: object
+      output_schema:
+        type: object
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      faas_namespace:
+        type: string
+      faas_name:
+        type: string
+    title: description missing
+  apiAgentGuardrail:
+    type: object
+    properties:
+      uuid:
+        type: string
+      priority:
+        type: integer
+        format: int32
+      is_attached:
+        type: boolean
+      created_at:
+        type: string
+        format: date-time
+      updated_at:
+        type: string
+        format: date-time
+      agent_uuid:
+        type: string
+      guardrail_uuid:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      default_response:
+        type: string
+      is_default:
+        type: boolean
+      type:
+        $ref: '#/definitions/apiGuardrailType'
+      metadata:
+        type: object
+    title: A Agent Guardrail
+  apiAgentPrice:
+    type: object
+    properties:
+      display_name:
+        type: string
+      model_uuid:
+        type: string
+      prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingPrice'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingAttribute'
+  apiAgreement:
+    type: object
+    properties:
+      uuid:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      url:
+        type: string
+    title: Agreement Description
+  apiAuditHeader:
+    type: object
+    properties:
+      actor_id:
+        type: string
+        format: uint64
+      actor_uuid:
+        type: string
+      user_id:
+        type: string
+        format: uint64
+      user_uuid:
+        type: string
+      context_urn:
+        type: string
+      actor_ip:
+        type: string
+      origin_application:
+        type: string
+    description: An alternative way to provide auth information. for internal use only.
+  apiBatchJobPhase:
+    type: string
+    enum:
+      - BATCH_JOB_PHASE_UNKNOWN
+      - BATCH_JOB_PHASE_PENDING
+      - BATCH_JOB_PHASE_RUNNING
+      - BATCH_JOB_PHASE_SUCCEEDED
+      - BATCH_JOB_PHASE_FAILED
+      - BATCH_JOB_PHASE_ERROR
+    default: BATCH_JOB_PHASE_UNKNOWN
+  apiBillingAttribute:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  apiBillingPrice:
+    type: object
+    properties:
+      rate:
+        type: string
+      region:
+        type: string
+  apiCancelKnowledgeBaseIndexingJobInputPublic:
+    type: object
+    properties:
+      uuid:
+        type: string
+    title: CancelKnowledgeBaseIndexingJobInputPublic description
+  apiCancelKnowledgeBaseIndexingJobOutput:
+    type: object
+    properties:
+      job:
+        $ref: '#/definitions/apiIndexingJob'
+    title: CancelKnowledgeBaseIndexingJobOutput description
+  apiChatbot:
+    type: object
+    properties:
+      name:
+        type: string
+        title: name of chatbot
+      primary_color:
+        type: string
+      secondary_color:
+        type: string
+      starting_message:
+        type: string
+      button_background_color:
+        type: string
+      logo:
+        type: string
+    title: A Chatbot
+  apiCreateAgentAPIKeyInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+      name:
+        type: string
+        title: name
+  apiCreateAgentAPIKeyOutput:
+    type: object
+    properties:
+      api_key:
+        type: string
+        title: api key
+      api_key_info:
+        $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key info
+  apiCreateAgentInputPublic:
+    type: object
+    properties:
+      name:
+        type: string
+        title: agent name
+      model_uuid:
+        type: string
+        title: model id
+      instruction:
+        type: string
+        title: agent instruction
+      description:
+        type: string
+        title: agent description
+      project_id:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      region:
+        type: string
+        title: region code
+      knowledge_base_uuid:
+        type: array
+        items:
+          type: string
+    title: Data for Agent Creation
+  apiCreateAgentOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: The created agent
+    title: Information about a newly created Agent
+  apiCreateChatbotInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+    title: data to create a chatbot
+  apiCreateChatbotOutput:
+    type: object
+    properties:
+      chatbot:
+        $ref: '#/definitions/apiChatbot'
+        title: the chatbot
+    title: info about a newly created chatbot
+  apiCreateGuardrailOutput:
+    type: object
+    properties:
+      guardrail:
+        $ref: '#/definitions/apiGuardrail'
+    title: CreateGuardrailOutput description
+  apiCreateKnowledgeBaseDataSourceInputPublic:
+    type: object
+    properties:
+      knowledge_base_uuid:
+        type: string
+        title: knowledge base id
+      bucket_name:
+        type: string
+        title: name of storage bucket
+      region:
+        type: string
+        title: region code
+      item_path:
+        type: string
+    title: data to create a knowledge base data source
+  apiCreateKnowledgeBaseDataSourceOutput:
+    type: object
+    properties:
+      knowledge_base_data_source:
+        $ref: '#/definitions/apiKnowledgeBaseDataSource'
+        title: the data source created
+    title: information about a newly created knowldege base data source
+  apiCreateKnowledgeBaseInputPublic:
+    type: object
+    properties:
+      name:
+        type: string
+        title: knowledge base name
+      embedding_model_uuid:
+        type: string
+        title: model id
+      database_id:
+        type: string
+      project_id:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      datasources:
+        type: array
+        items:
+          $ref: '#/definitions/apiKBDataSource'
+      region:
+        type: string
+        title: region code
+      vpc_uuid:
+        type: string
+    title: data to create a new knowledge base
+  apiCreateKnowledgeBaseOutput:
+    type: object
+    properties:
+      knowledge_base:
+        $ref: '#/definitions/apiKnowledgeBase'
+        title: the knowledge base
+    title: information about a newly created knowledge base
+  apiCreateModelInputPublic:
+    type: object
+    properties:
+      name:
+        type: string
+        title: model name
+      version:
+        $ref: '#/definitions/apiModelVersion'
+        title: model version
+      metadata:
+        type: object
+        title: a json field with arbitrary meta data about the model
+      parent_uuid:
+        type: string
+        title: >-
+          unique id of the parent model. if this model is a fine tuned version
+          of another model, use the id of the other model here
+    title: data to create a new model
+  apiCreateModelOutput:
+    type: object
+    properties:
+      model:
+        $ref: '#/definitions/apiModel'
+        title: the model
+    title: information about a newly created model
+  apiDeleteAgentAPIKeyOutput:
+    type: object
+    properties:
+      api_key_info:
+        $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key info
+  apiDeleteAgentOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+    title: Info about a deleted agent
+  apiDeleteChatbotOutput:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+    title: information about a delete chatbot
+  apiDeleteGuardrailOutput:
+    type: object
+    properties:
+      uuid:
+        type: string
+    title: DeleteGuardrailOutput description
+  apiDeleteKnowledgeBaseDataSourceOutput:
+    type: object
+    properties:
+      knowledge_base_uuid:
+        type: string
+        title: knowledge base id
+      data_source_uuid:
+        type: string
+        title: data source id
+    title: information about a newly deleted knowledge base data source
+  apiDeleteKnowledgeBaseOutput:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: the id of the deleted knowledge base
+    title: information about a deleted knowledge base
+  apiDeployment:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+      name:
+        type: string
+        title: name
+      url:
+        type: string
+        title: access your deployed agent here
+      status:
+        $ref: '#/definitions/apiDeploymentStatus'
+      visibility:
+        $ref: '#/definitions/apiDeploymentVisibility'
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+    title: description of deployment
+  apiDeploymentStatus:
+    type: string
+    enum:
+      - STATUS_UNKNOWN
+      - STATUS_WAITING_FOR_DEPLOYMENT
+      - STATUS_DEPLOYING
+      - STATUS_RUNNING
+      - STATUS_FAILED
+      - STATUS_WAITING_FOR_UNDEPLOYMENT
+      - STATUS_UNDEPLOYING
+      - STATUS_UNDEPLOYMENT_FAILED
+      - STATUS_DELETED
+    default: STATUS_UNKNOWN
+  apiDeploymentVisibility:
+    type: string
+    enum:
+      - VISIBILITY_UNKNOWN
+      - VISIBILITY_DISABLED
+      - VISIBILITY_PLAYGROUND
+      - VISIBILITY_PUBLIC
+      - VISIBILITY_PRIVATE
+    default: VISIBILITY_UNKNOWN
+  apiGetAgentOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: One Agent
+  apiGetAgentUsageOutput:
+    type: object
+    properties:
+      usage:
+        $ref: '#/definitions/apiResourceUsage'
+    title: agent usage
+  apiGetChildrenOutput:
+    type: object
+    properties:
+      children:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+        title: child agents
+    title: child list for an agent
+  apiGetGuardrailOutput:
+    type: object
+    properties:
+      guardrail:
+        $ref: '#/definitions/apiGuardrail'
+  apiGetKnowledgeBaseIndexingJobOutput:
+    type: object
+    properties:
+      job:
+        $ref: '#/definitions/apiIndexingJob'
+    title: GetKnowledgeBaseIndexingJobOutput description
+  apiGetKnowledgeBaseIndexingJobUsageOutput:
+    type: object
+    properties:
+      usage:
+        $ref: '#/definitions/apiResourceUsage'
+    title: knowledge base indexing job usage
+  apiGetKnowledgeBaseOutput:
+    type: object
+    properties:
+      knowledge_base:
+        $ref: '#/definitions/apiKnowledgeBase'
+        title: the knowledge base
+      database_status:
+        $ref: '#/definitions/dbaasClusterStatus'
+    title: the knowledge base
+  apiGetModelOutput:
+    type: object
+    properties:
+      model:
+        $ref: '#/definitions/apiModel'
+        title: the model
+    title: a specific model
+  apiGetModelPlaygroundTokensOutput:
+    type: object
+    properties:
+      tokens_remaining:
+        type: integer
+        format: int64
+    title: GetModelPlaygroundTokensOutput description
+  apiGetModelUsageOutput:
+    type: object
+    properties:
+      usage:
+        $ref: '#/definitions/apiResourceUsage'
+        title: the model usage
+    title: information about model usage
+  apiGetPreferredRegionOutput:
+    type: object
+    properties:
+      region:
+        $ref: '#/definitions/genaiapiRegion'
+        title: region code
+    title: Region code of preferred Regions
+  apiGetTeamAgreementOutput:
+    type: object
+    properties:
+      team_agreement:
+        $ref: '#/definitions/apiTeamAgreement'
+    title: GetTeamAgreementOutput Output
+  apiGuardrail:
+    type: object
+    properties:
+      uuid:
+        type: string
+      template_uuid:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      default_response:
+        type: string
+      type:
+        $ref: '#/definitions/apiGuardrailType'
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      is_default:
+        type: boolean
+      metadata:
+        type: object
+      agent_uuids:
+        type: array
+        items:
+          type: string
+        title: list of attached agents uuids
+    title: Guardrail description
+  apiGuardrailPrice:
+    type: object
+    properties:
+      display_name:
+        type: string
+      guardrail_template_uuid:
+        type: string
+      prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingPrice'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingAttribute'
+  apiGuardrailTemplate:
+    type: object
+    properties:
+      uuid:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      default_response:
+        type: string
+      type:
+        $ref: '#/definitions/apiGuardrailType'
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      metadata:
+        type: object
+    title: GuardrailTemplate description
+  apiGuardrailType:
+    type: string
+    enum:
+      - GUARDRAIL_TYPE_UNKNOWN
+      - GUARDRAIL_TYPE_JAILBREAK
+      - GUARDRAIL_TYPE_SENSITIVE_DATA
+      - GUARDRAIL_TYPE_CONTENT_MODERATION
+    default: GUARDRAIL_TYPE_UNKNOWN
+  apiIndexingJob:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+      knowledge_base_uuid:
+        type: string
+        title: knowledge base id
+      data_source_uuids:
+        type: array
+        items:
+          type: string
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      started_at:
+        type: string
+        format: date-time
+      finished_at:
+        type: string
+        format: date-time
+      phase:
+        $ref: '#/definitions/apiBatchJobPhase'
+    title: IndexingJob description
+  apiIssueAgentTokenInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: Agent ID
+    title: Input for issuing a token for an agent
+  apiIssueAgentTokenOutput:
+    type: object
+    properties:
+      access_token:
+        type: string
+        title: the token
+      refresh_token:
+        type: string
+        title: the token used to refresh
+    title: information about a newly issued token
+  apiIssueModelPlaygroundTokenOutput:
+    type: object
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    title: IssueModelPlaygroundTokenOutput description
+  apiKBDataSource:
+    type: object
+    properties:
+      bucket_name:
+        type: string
+      bucket_region:
+        type: string
+      item_path:
+        type: string
+  apiKnowledgeBase:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id for knowledge base
+      name:
+        type: string
+        title: name of knowledge base
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      tags:
+        type: array
+        items:
+          type: string
+      region:
+        type: string
+        title: region code
+      embedding_model_uuid:
+        type: string
+      project_id:
+        type: string
+      database_id:
+        type: string
+      last_indexing_job:
+        $ref: '#/definitions/apiIndexingJob'
+      added_to_agent_at:
+        type: string
+        format: date-time
+        title: time when the knowledge base was added to the agent
+      user_id:
+        type: string
+        format: int64
+        title: id of user that created the knowledge base
+    title: Knowledgebase Description
+  apiKnowledgeBaseDataSource:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id of knowledge base
+      bucket_name:
+        type: string
+        title: name of storage bucket
+      region:
+        type: string
+        title: region code
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      item_path:
+        type: string
+        title: path of folder or object in bucket
+    title: Data Source configuration for Knowledge Bases
+  apiKnowledgeBasePrice:
+    type: object
+    properties:
+      display_name:
+        type: string
+      model_uuid:
+        type: string
+      prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingPrice'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingAttribute'
+  apiLimitForTier:
+    type: object
+    properties:
+      tier:
+        $ref: '#/definitions/limitsTier'
+      limit:
+        type: string
+        format: uint64
+  apiLinkAgentFunctionInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agnet id
+      function_name:
+        type: string
+        title: function name
+      description:
+        type: string
+        title: function description
+      input_schema:
+        type: object
+      output_schema:
+        type: object
+      faas_name:
+        type: string
+      faas_namespace:
+        type: string
+    title: information for a agent function link
+  apiLinkAgentFunctionOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: information about a newly function linked agent
+  apiLinkAgentGuardrailOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: information about an updated agent
+  apiLinkAgentInputPublic:
+    type: object
+    properties:
+      parent_agent_uuid:
+        type: string
+        title: parent agent id
+      child_agent_uuid:
+        type: string
+        title: child agent id
+      route_name:
+        type: string
+        title: name of route
+      if_case:
+        type: string
+    title: information for linking an agent
+  apiLinkAgentOutput:
+    type: object
+    properties:
+      parent_agent_uuid:
+        type: string
+        title: parent agent id
+      child_agent_uuid:
+        type: string
+        title: child agent id
+    title: information about a newly linked agent
+  apiLinkKnowledgeBaseOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+    title: information about a linked knowledge base
+  apiLinks:
+    type: object
+    properties:
+      pages:
+        $ref: '#/definitions/apiPages'
+        title: Links to other pages
+    title: Links to other pages
+  apiListAgentAPIKeysOutput:
+    type: object
+    properties:
+      api_key_infos:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key infos
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+  apiListAgentLimitsForTiersOutput:
+    type: object
+    properties:
+      limit_for_tier:
+        type: array
+        items:
+          $ref: '#/definitions/apiLimitForTier'
+  apiListAgentPricesOutput:
+    type: object
+    properties:
+      agent_prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgentPrice'
+  apiListAgentsOutput:
+    type: object
+    properties:
+      agents:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+        title: Agents
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: List of Agents
+  apiListGuardrailAgentsOutput:
+    type: object
+    properties:
+      agents:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+  apiListGuardrailLimitsForTiersOutput:
+    type: object
+    properties:
+      limit_for_tier:
+        type: array
+        items:
+          $ref: '#/definitions/apiLimitForTier'
+  apiListGuardrailPricesOutput:
+    type: object
+    properties:
+      guardrail_prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiGuardrailPrice'
+  apiListGuardrailTemplatesOutput:
+    type: object
+    properties:
+      templates:
+        type: array
+        items:
+          $ref: '#/definitions/apiGuardrailTemplate'
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: ListGuardrailTemplatesOutput description
+  apiListGuardrailsOutput:
+    type: object
+    properties:
+      guardrails:
+        type: array
+        items:
+          $ref: '#/definitions/apiGuardrail'
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: ListGuardrailsOutput description
+  apiListKnowledgeBaseAgentsOutput:
+    type: object
+    properties:
+      agents:
+        type: array
+        items:
+          $ref: '#/definitions/apiAgent'
+        title: the agents
+    title: list of agents
+  apiListKnowledgeBaseDataSourcesOutput:
+    type: object
+    properties:
+      knowledge_base_data_sources:
+        type: array
+        items:
+          $ref: '#/definitions/apiKnowledgeBaseDataSource'
+        title: the data sources
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: a list of knowledge base data sources
+  apiListKnowledgeBaseIndexingJobsOutput:
+    type: object
+    properties:
+      jobs:
+        type: array
+        items:
+          $ref: '#/definitions/apiIndexingJob'
+        title: the indexing jobs
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: indexing jobs
+  apiListKnowledgeBaseLimitsForTiersOutput:
+    type: object
+    properties:
+      limit_for_tier:
+        type: array
+        items:
+          $ref: '#/definitions/apiLimitForTier'
+  apiListKnowledgeBasePricesOutput:
+    type: object
+    properties:
+      knowledge_base_prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiKnowledgeBasePrice'
+  apiListKnowledgeBasesOutput:
+    type: object
+    properties:
+      knowledge_bases:
+        type: array
+        items:
+          $ref: '#/definitions/apiKnowledgeBase'
+        title: the knowledge bases
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: list of knowledge bases
+  apiListModelPricesOutput:
+    type: object
+    properties:
+      model_prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiModelPrice'
+  apiListModelsOutput:
+    type: object
+    properties:
+      models:
+        type: array
+        items:
+          $ref: '#/definitions/apiModel'
+        title: the models
+      links:
+        $ref: '#/definitions/apiLinks'
+        title: links to other pages
+      meta:
+        $ref: '#/definitions/apiMeta'
+        title: information about the data set
+    title: a list of models
+  apiListRegionsOutput:
+    type: object
+    properties:
+      regions:
+        type: array
+        items:
+          $ref: '#/definitions/genaiapiRegion'
+        title: region code
+    title: Region Codes
+  apiMeta:
+    type: object
+    properties:
+      total:
+        type: string
+        format: uint64
+        title: total amount of items over all pages
+    title: Meta information about the data set
+  apiModel:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+      name:
+        type: string
+        title: name of the model
+      inference_name:
+        type: string
+        title: internally used name
+      version:
+        $ref: '#/definitions/apiModelVersion'
+        title: version
+      inference_version:
+        type: string
+        title: internally used version
+      url:
+        type: string
+        title: download url
+      is_foundational:
+        type: boolean
+        title: true if it is a foundational model provided by do
+      upload_complete:
+        type: boolean
+        title: model has been fully uploaded
+      created_at:
+        type: string
+        format: date-time
+        title: creation date / time
+      updated_at:
+        type: string
+        format: date-time
+        title: last modified
+      metadata:
+        type: object
+        title: additional meta data
+      parent_uuid:
+        type: string
+        title: unique id of the model, this model is based on
+      agreement:
+        $ref: '#/definitions/apiAgreement'
+    title: Description of a Model
+  apiModelPrice:
+    type: object
+    properties:
+      display_name:
+        type: string
+      model_uuid:
+        type: string
+      prices:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingPrice'
+      attributes:
+        type: array
+        items:
+          $ref: '#/definitions/apiBillingAttribute'
+  apiModelUploadCompleteInputPublic:
+    type: object
+    properties:
+      name:
+        type: string
+        title: model name
+      version:
+        $ref: '#/definitions/apiModelVersion'
+        title: model version
+    title: information about which model to set the upload complete status to true
+  apiModelUploadCompleteOutput:
+    type: object
+    properties:
+      model:
+        $ref: '#/definitions/apiModel'
+        title: the model
+    title: information about an updated model
+  apiModelUsecase:
+    type: string
+    enum:
+      - MODEL_USECASE_UNKNOWN
+      - MODEL_USECASE_AGENT
+      - MODEL_USECASE_FINETUNED
+      - MODEL_USECASE_KNOWLEDGEBASE
+      - MODEL_USECASE_GUARDRAIL
+    default: MODEL_USECASE_UNKNOWN
+  apiModelVersion:
+    type: object
+    properties:
+      major:
+        type: integer
+        format: int64
+        title: major version number
+      minor:
+        type: integer
+        format: int64
+        title: minor version number
+      patch:
+        type: integer
+        format: int64
+        title: patch version number
+    title: Version Information about a Model
+  apiPages:
+    type: object
+    properties:
+      first:
+        type: string
+        title: first page
+      previous:
+        type: string
+        title: previous page
+      next:
+        type: string
+        title: next page
+      last:
+        type: string
+        title: last page
+    title: Information about how to reach other pages
+  apiRefreshAgentTokenOutput:
+    type: object
+    properties:
+      access_token:
+        type: string
+        title: the token
+      refresh_token:
+        type: string
+        title: rhe refreshed token
+    title: information about a refreshed token
+  apiRefreshModelPlaygroundTokenOutput:
+    type: object
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    title: RefreshModelPlaygroundTokenOutput description
+  apiRegenerateAgentAPIKeyOutput:
+    type: object
+    properties:
+      api_key:
+        type: string
+        title: api key
+      api_key_info:
+        $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key info
+  apiResourceUsage:
+    type: object
+    properties:
+      start:
+        type: string
+        format: date-time
+      stop:
+        type: string
+        format: date-time
+      measurements:
+        type: array
+        items:
+          $ref: '#/definitions/apiUsageMeasurement'
+    title: Resource Usage Description
+  apiStartKnowledgeBaseIndexingJobInputPublic:
+    type: object
+    properties:
+      knowledge_base_uuid:
+        type: string
+      data_source_uuids:
+        type: array
+        items:
+          type: string
+    title: StartKnowledgeBaseIndexingJobInputPublic description
+  apiStartKnowledgeBaseIndexingJobOutput:
+    type: object
+    properties:
+      job:
+        $ref: '#/definitions/apiIndexingJob'
+    title: StartKnowledgeBaseIndexingJobOutput description
+  apiTeamAgreement:
+    type: object
+    properties:
+      accepted_at:
+        type: string
+        format: date-time
+      agreement_uuid:
+        type: string
+    title: Team Agreement Description
+  apiTeamModelURLOutput:
+    type: object
+    properties:
+      url:
+        type: string
+        title: the signed url that can be used to upload one file
+    title: model url output
+  apiUnlinkAgentFunctionOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: information about a newly unlinked agent
+  apiUnlinkAgentGuardrailOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+    title: UnlinkAgentGuardrailOutput description
+  apiUnlinkAgentOutput:
+    type: object
+    properties:
+      parent_agent_uuid:
+        type: string
+        title: pagent agent id
+      child_agent_uuid:
+        type: string
+        title: child agent id
+    title: information about a removed linkage
+  apiUnlinkKnowledgeBaseOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: agent
+    title: informatinon about a unlinked knowledge base
+  apiUpdateAgentAPIKeyInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+      api_key_uuid:
+        type: string
+        title: api key id
+      name:
+        type: string
+        title: name
+  apiUpdateAgentAPIKeyOutput:
+    type: object
+    properties:
+      api_key_info:
+        $ref: '#/definitions/apiAgentAPIKeyInfo'
+        title: api key info
+  apiUpdateAgentDeploymentVisbilityOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: UpdateAgentDeploymentVisbilityOutput description
+  apiUpdateAgentDeploymentVisibilityInputPublic:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id
+      visibility:
+        $ref: '#/definitions/apiDeploymentVisibility'
+    title: UpdateAgentDeploymentVisibilityInputPublic description
+  apiUpdateAgentFunctionInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+      function_uuid:
+        type: string
+        title: function id
+      function_name:
+        type: string
+        title: function name
+      description:
+        type: string
+        title: funciton description
+      input_schema:
+        type: object
+      output_schema:
+        type: object
+      faas_namespace:
+        type: string
+      faas_name:
+        type: string
+    title: information about updating an agent function
+  apiUpdateAgentFunctionOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the agent
+    title: the updated agent
+  apiUpdateAgentInputPublic:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique agent id
+      name:
+        type: string
+        title: agent name
+      instruction:
+        type: string
+        title: agent instruction
+      description:
+        type: string
+        title: agent description
+      model_uuid:
+        type: string
+        title: model id
+      project_id:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+      k:
+        type: integer
+        format: int64
+      temperature:
+        type: number
+        format: float
+      top_p:
+        type: number
+        format: float
+      max_tokens:
+        type: integer
+        format: int64
+    title: Data to modify an existing Agent
+  apiUpdateAgentOutput:
+    type: object
+    properties:
+      agent:
+        $ref: '#/definitions/apiAgent'
+        title: the updated agent
+    title: information about an updated agent
+  apiUpdateChatbotInputPublic:
+    type: object
+    properties:
+      agent_uuid:
+        type: string
+        title: agent id
+      name:
+        type: string
+        title: chatbot name
+      primary_color:
+        type: string
+      secondary_color:
+        type: string
+      starting_message:
+        type: string
+      button_background_color:
+        type: string
+      logo:
+        type: string
+    title: data to update a chatbot
+  apiUpdateChatbotOutput:
+    type: object
+    properties:
+      chatbot:
+        $ref: '#/definitions/apiChatbot'
+        title: the chatbot
+    title: info about an updated chatbot
+  apiUpdateGuardrailOutput:
+    type: object
+    properties:
+      guardrail:
+        $ref: '#/definitions/apiGuardrail'
+    title: UpdateGuardrailOutput description
+  apiUpdateKnowledgeBaseInputPublic:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: knowledge base id
+      name:
+        type: string
+        title: knowledge base name
+      embedding_model_uuid:
+        type: string
+        title: model id
+      database_id:
+        type: string
+      project_id:
+        type: string
+      tags:
+        type: array
+        items:
+          type: string
+    title: information about updating a knowledge base
+  apiUpdateKnowledgeBaseOutput:
+    type: object
+    properties:
+      knowledge_base:
+        $ref: '#/definitions/apiKnowledgeBase'
+        title: the knowldege base
+    title: information about an updated knowledge base
+  apiUpdateLinkedAgentInputPublic:
+    type: object
+    properties:
+      parent_agent_uuid:
+        type: string
+        title: parent agent id
+      child_agent_uuid:
+        type: string
+        title: child agent id
+      route_name:
+        type: string
+        title: route name
+      if_case:
+        type: string
+      uuid:
+        type: string
+        title: unique id of linkage
+    title: information about updating the linkage of an agent
+  apiUpdateLinkedAgentOutput:
+    type: object
+    properties:
+      uuid:
+        type: string
+        title: unique id of linkage
+      parent_agent_uuid:
+        type: string
+        title: parent agent id
+      child_agent_uuid:
+        type: string
+        title: child agent id
+    title: information about an updated linkage
+  apiUpdateModelMetadataInputPublic:
+    type: object
+    properties:
+      name:
+        type: string
+        title: model name
+      version:
+        $ref: '#/definitions/apiModelVersion'
+        title: model version
+      metadata:
+        type: object
+        description: >-
+          updated meta data. the data is in a json object. existing attributes
+          in the json will not be deleted. attributes will be added or updated
+          if they exist.
+    title: updated meta data for a model
+  apiUpdateModelMetadataOutput:
+    type: object
+    properties:
+      model:
+        $ref: '#/definitions/apiModel'
+        title: the model
+    title: information about updated meta data for a model
+  apiUsageMeasurement:
+    type: object
+    properties:
+      usage_type:
+        type: string
+      tokens:
+        type: integer
+        format: int64
+    title: Usage Measurement Description
+  dbaasClusterStatus:
+    type: string
+    enum:
+      - CREATING
+      - ONLINE
+      - POWEROFF
+      - REBUILDING
+      - REBALANCING
+      - DECOMMISSIONED
+      - FORKING
+      - MIGRATING
+      - RESIZING
+      - RESTORING
+      - POWERING_ON
+      - UNHEALTHY
+    default: CREATING
+  genaiapiRegion:
+    type: object
+    properties:
+      region:
+        type: string
+        title: region code
+      serves_inference:
+        type: boolean
+      serves_batch:
+        type: boolean
+      inference_url:
+        type: string
+        title: url for inference server
+      stream_inference_url:
+        type: string
+    title: Description for a specific Region
+  limitsTier:
+    type: string
+    enum:
+      - UNKNOWN
+      - DISABLED
+      - FREE
+      - TIER_3
+      - TIER_10
+      - TIER_10_PLUS
+      - TIER_15
+      - TIER_25
+      - TIER_100
+      - TIER_500
+      - TIER_2000
+      - TIER_10000
+      - TIER_50000
+      - TIER_100000
+      - TIER_200000
+    default: UNKNOWN
+    title: '- TIER_3: belows are standard tiers'
+  protobufFieldMask:
+    type: object
+    properties:
+      paths:
+        type: array
+        items:
+          type: string
+        description: The set of field mask paths.
+    description: >-
+      paths: "f.a"
+          paths: "f.b.d"
+
+      Here `f` represents a field in some root message, `a` and `b`
+
+      fields in the message found in `f`, and `d` a field found in the
+
+      message in `f.b`.
+
+
+      Field masks are used to specify a subset of fields that should be
+
+      returned by a get operation or modified by an update operation.
+
+      Field masks also have a custom JSON encoding (see below).
+
+
+      # Field Masks in Projections
+
+
+      When used in the context of a projection, a response message or
+
+      sub-message is filtered by the API to only contain those fields as
+
+      specified in the mask. For example, if the mask in the previous
+
+      example is applied to a response message as follows:
+
+          f {
+            a : 22
+            b {
+              d : 1
+              x : 2
+            }
+            y : 13
+          }
+          z: 8
+
+      The result will not contain specific values for fields x,y and z
+
+      (their value will be set to the default, and omitted in proto text
+
+      output):
+
+
+          f {
+            a : 22
+            b {
+              d : 1
+            }
+          }
+
+      A repeated field is not allowed except at the last position of a
+
+      paths string.
+
+
+      If a FieldMask object is not present in a get operation, the
+
+      operation applies to all fields (as if a FieldMask of all fields
+
+      had been specified).
+
+
+      Note that a field mask does not necessarily apply to the
+
+      top-level response message. In case of a REST get operation, the
+
+      field mask applies directly to the response, but in case of a REST
+
+      list operation, the mask instead applies to each individual message
+
+      in the returned resource list. In case of a REST custom method,
+
+      other definitions may be used. Where the mask applies will be
+
+      clearly documented together with its declaration in the API.  In
+
+      any case, the effect on the returned resource/resources is required
+
+      behavior for APIs.
+
+
+      # Field Masks in Update Operations
+
+
+      A field mask in update operations specifies which fields of the
+
+      targeted resource are going to be updated. The API is required
+
+      to only change the values of the fields as specified in the mask
+
+      and leave the others untouched. If a resource is passed in to
+
+      describe the updated values, the API ignores the values of all
+
+      fields not covered by the mask.
+
+
+      If a repeated field is specified for an update operation, new values will
+
+      be appended to the existing repeated field in the target resource. Note
+      that
+
+      a repeated field is only allowed in the last position of a `paths` string.
+
+
+      If a sub-message is specified in the last position of the field mask for
+      an
+
+      update operation, then new value will be merged into the existing
+      sub-message
+
+      in the target resource.
+
+
+      For example, given the target message:
+
+          f {
+            b {
+              d: 1
+              x: 2
+            }
+            c: [1]
+          }
+
+      And an update message:
+
+          f {
+            b {
+              d: 10
+            }
+            c: [2]
+          }
+
+      then if the field mask is:
+
+       paths: ["f.b", "f.c"]
+
+      then the result will be:
+
+          f {
+            b {
+              d: 10
+              x: 2
+            }
+            c: [1, 2]
+          }
+
+      An implementation may provide options to override this default behavior
+      for
+
+      repeated and message fields.
+
+
+      In order to reset a field's value to the default, the field must
+
+      be in the mask and set to the default value in the provided resource.
+
+      Hence, in order to reset all fields of a resource, provide a default
+
+      instance of the resource and set all fields in the mask, or do
+
+      not provide a mask as described below.
+
+
+      If a field mask is not present on update, the operation applies to
+
+      all fields (as if a field mask of all fields has been specified).
+
+      Note that in the presence of schema evolution, this may mean that
+
+      fields the client does not know and has therefore not filled into
+
+      the request will be reset to their default. If this is unwanted
+
+      behavior, a specific service may require a client to always specify
+
+      a field mask, producing an error if not.
+
+
+      As with get operations, the location of the resource which
+
+      describes the updated values in the request message depends on the
+
+      operation kind. In any case, the effect of the field mask is
+
+      required to be honored by the API.
+
+
+      ## Considerations for HTTP REST
+
+
+      The HTTP kind of an update operation which uses a field mask must
+
+      be set to PATCH instead of PUT in order to satisfy HTTP semantics
+
+      (PUT must only be used for full updates).
+
+
+      # JSON Encoding of Field Masks
+
+
+      In JSON, a field mask is encoded as a single string where paths are
+
+      separated by a comma. Fields name in each path are converted
+
+      to/from lower-camel naming conventions.
+
+
+      As an example, consider the following message declarations:
+
+          message Profile {
+            User user = 1;
+            Photo photo = 2;
+          }
+          message User {
+            string display_name = 1;
+            string address = 2;
+          }
+
+      In proto a field mask for `Profile` may look as such:
+
+          mask {
+            paths: "user.display_name"
+            paths: "photo"
+          }
+
+      In JSON, the same mask is represented as below:
+
+          {
+            mask: "user.displayName,photo"
+          }
+
+      # Field Masks and Oneof Fields
+
+
+      Field masks treat fields in oneofs just as regular fields. Consider the
+
+      following message:
+
+          message SampleMessage {
+            oneof test_oneof {
+              string name = 4;
+              SubMessage sub_message = 9;
+            }
+          }
+
+      The field mask can be:
+
+          mask {
+            paths: "name"
+          }
+
+      Or:
+
+          mask {
+            paths: "sub_message"
+          }
+
+      Note that oneof type names ("test_oneof" in this case) cannot be used in
+
+      paths.
+
+
+      ## Field Mask Verification
+
+
+      The implementation of any API method which has a FieldMask type field in
+      the
+
+      request should verify the included field paths, and return an
+
+      `INVALID_ARGUMENT` error if any path is unmappable.
+    title: '`FieldMask` represents a set of symbolic field paths, for example:'
+  protobufNullValue:
+    type: string
+    enum:
+      - NULL_VALUE
+    default: NULL_VALUE
+    description: |-
+      `NullValue` is a singleton enumeration to represent the null value for the
+      `Value` type union.
+
+       The JSON representation for `NullValue` is JSON `null`.
+
+       - NULL_VALUE: Null value.
+externalDocs:
+  description: API Documentation
+  url: https://developers.digitalocean.com/documentation/v2/
